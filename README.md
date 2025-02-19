@@ -89,5 +89,18 @@ Após salvar seu arquvio HTML, use este comando para reiniciar o Nginx para atua
 ```
 sudo systemctl restart nginx
 ```
-Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html
-![Te](
+Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
+![Print](https://github.com/Gabcr28/ProjetoLinuxPB/blob/main/Print/40.png)
+Após isto vamos configurar o Nginx para reiniciar automaticamente a cada minuto. Primeiro instale o cronie:
+```
+sudo yum install cronie -y
+```
+Depois habilite o cronie:
+```
+sudo systemctl enable crond
+sudo systemctl start crond
+```
+E habilitado o cronie para configurar o Nginx para reiniciar digite:
+```
+crontab -e
+```
