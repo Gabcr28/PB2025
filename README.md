@@ -100,7 +100,98 @@ Depois habilite o cronie:
 sudo systemctl enable crond
 sudo systemctl start crond
 ```
-E habilitado o cronie para configurar o Nginx para reiniciar digite:
+Após habilitar o crond iremos criar um arquivo .sh para rodar a cada minuto no crontab, exemplo:
+```
+sudo nano /usr/local/bin/renicio.sh
+```
+```bash
+#!/bin/bash
+
+# Configuração
+URL="http://localhost"  # Altere para a URL do seu site
+
+# Verifica se o site responde corretamente
+if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
+else
+    sudo systemctl restart nginx
+fi
+```
+E para fazer o arquvio criada para rodar a cada minuto, digite:
 ```
 crontab -e
 ```
+E no conteúdo do contrab -e para reiniciar a cada minuto, coloque:
+```
+* * * * * /usr/local/bin/renicio.sh
+```
+E de permissão para execução:
+```
+sudo chmod +x /usr/local/bin/reinicio.sh
+```
+E para testar se está funcionando, dê o comando:
+```
+sudo systemctl stop nginx
+```
+E verifique se o nginx reinicia automaticamente.
+## Etapa 3: Monitoramento e Notificações Tarefas:
+### Criar um script em Bash para monitorar a disponibilidade do site:
+Para criar um script de monitoramento podemos apenas modificar o arquivo reinicio.sh:
+```
+sudo nano /usr/local/bin/renicio.sh
+```
+```bash
+#!/bin/bash
+
+# Configuração
+URL="http://localhost"  # Altere para a URL do seu site
+LOG_FILE="/var/log/monitoramento.log"
+
+# Verifica se o site responde corretamente
+if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
+then
+    echo "$(date) - O site está online." >> $LOG_FILE
+else
+    echo "$(date) - O site está fora do ar! Reiniciando Nginx..." >> $LOG_FILE
+    sudo systemctl restart nginx
+fi
+```
+E verifique se o nginx reinicia automaticamente e você também pode verificar o caminho do arquivo log que criamos no caminho /var/log/monitoramento.log e caso não esteja criado crie e deixe com permissão:
+```
+sudo chmod 666 /var/log/monitoramento.log
+```
+### Enviar uma notificação via Discord se detectar indisponibilidade.
+Para adicionarmos essa funcionalidade primeiro abra seu discord, clique com o botão esquerdo do mouse no seu servidor, vá em configurações do servidor e depois clique em integrações. Depois clique em Webhooks, crie um Webhook caso não tenha e selecione o canal que ele irá enviar as notificações e copie o URL.
+
+No terminal edite o arquivo reinicio.sh
+```
+sudo nano /usr/local/bin/renicio.sh
+```
+```bash
+#!/bin/bash
+
+# Configuração
+URL="http://localhost"  # Altere para a URL do seu site
+LOG_FILE="/var/log/monitoramento.log"
+DISCORD_WEBHOOK="https://discord.com/api/webhooks/SEU_WEBHOOK"
+
+# Função para enviar alerta para o Discord
+enviar_notificacao() {
+    mensagem="$1"
+    curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$mensagem\"}" $DISCORD_WEBHOOK
+}
+
+# Verifica se o site responde corretamente
+if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
+then
+    echo "$(date) - O site está online." >> $LOG_FILE
+else
+    echo "$(date) - O site está fora do ar! Reiniciando Nginx..." >> $LOG_FILE
+    sudo systemctl restart nginx
+    enviar_notificacao "❌ Alerta: O site não está respondendo! Nginx foi reiniciado."
+fi
+```
+Após este passo para testar o Webhook dê o camando para parar o Nginx:
+```
+sudo systemctl stop nginx
+```
+E verifique no Discord se o Webhook está respondendo no canal do seu servidor escolhido, Exemplo:
