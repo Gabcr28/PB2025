@@ -133,7 +133,7 @@ E para testar se está funcionando, dê o comando:
 sudo systemctl stop nginx
 ```
 E verifique se o nginx reinicia automaticamente.
-## Etapa 3: Monitoramento e Notificações Tarefas:
+## Etapa 3: Monitoramento e Notificações:
 ### Criar um script em Bash para monitorar a disponibilidade do site:
 Para criar um script de monitoramento podemos apenas modificar o arquivo reinicio.sh:
 ```
