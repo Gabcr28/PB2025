@@ -196,3 +196,6 @@ sudo systemctl stop nginx
 ```
 E verifique no Discord se o Webhook está respondendo no canal do seu servidor escolhido, Exemplo:
 ![Print](https://github.com/Gabcr28/ProjetoLinuxPB/blob/main/Print/41.png)
+
+## Bônus (Opcional):
+### Automação com User Data:
