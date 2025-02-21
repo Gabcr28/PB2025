@@ -87,15 +87,14 @@ sudo nano /usr/share/nginx/html/index.html
 ```
 ```hmtl
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu site com Nginx</title>
+    <title>Servidor Nginx na Amazon EC2</title>
 </head>
 <body>
-    <h1>Olá, mundo!</h1>
-    <p>Este é um site servido pelo Nginx.</p>
+    <h1>Sucesso! Nginx está funcionando na Amazon EC2!</h1>
 </body>
 </html>
 ```
@@ -104,7 +103,7 @@ Após salvar seu arquvio HTML, use este comando para reiniciar o Nginx para atua
 sudo systemctl restart nginx
 ```
 Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
-![Print](https://github.com/Gabcr28/ProjetoLinuxPB/blob/main/Print/40.png)
+![Image](https://github.com/user-attachments/assets/1dd7a089-91ca-4864-8a85-adc7ddef2ca6)
 Após isto vamos configurar o Nginx para reiniciar automaticamente a cada minuto. Primeiro instale o cronie:
 ```
 sudo yum install cronie -y
@@ -209,7 +208,7 @@ Após este passo para testar o Webhook dê o camando para parar o Nginx:
 sudo systemctl stop nginx
 ```
 E verifique no Discord se o Webhook está respondendo no canal do seu servidor escolhido, Exemplo:
-![Print](https://github.com/Gabcr28/ProjetoLinuxPB/blob/main/Print/41.png)
+![Image](https://github.com/user-attachments/assets/67884914-3ce5-45c9-b1bf-a1f18363bc3e)
 
 ## Bônus (Opcional):
 ### Automação com User Data:
