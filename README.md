@@ -104,6 +104,10 @@ sudo systemctl restart nginx
 ```
 Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
 ![Image](https://github.com/user-attachments/assets/1dd7a089-91ca-4864-8a85-adc7ddef2ca6)
+
+
+Após colar o IPv4 da sua Instância na barra de pesquisa do navegador, a página irá abrir desta forma:
+![Image](https://github.com/user-attachments/assets/69905e7b-3d73-4de1-ac5e-da7d21d2f81c)
 Após isto vamos configurar o Nginx para reiniciar automaticamente a cada minuto. Primeiro instale o cronie:
 ```
 sudo yum install cronie -y
