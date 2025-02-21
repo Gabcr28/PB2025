@@ -27,13 +27,17 @@ Em "Instance type" será utilizado "t2.micro".
 
 Em "key pair(login)" selecione uma chave .pem ou crie uma caso não tenha uma já criada e faça o download da chave .pem em sua máquina.
 
-Em "Network settings" selecione a VPC criada e uma subnet pública da VPC criada, deixe "Enable" a opção "Auto-assign public IP" para ser possível acessar a instância via SSH e selecione um Security Group Com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4.
+Em "Network settings" selecione a VPC criada e uma subnet pública da VPC criada, deixe "Enable" a opção "Auto-assign public IP" para ser possível acessar a instância via SSH e selecione um Security Group Com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4. 
+
 
 Obs: Caso você queria usar a implementação de UserData na criação da instância e já instalar com Nginx, Cron, HTML simples e script de monitoramento vá até o tópico "Bônus", adiante estas configurações serão instaladas manualmente
 
 E após isto clique em "Launch Instance"
 
 ### Acessar a instância via SSH:
+Para acessar a página da sua instância copie este IP e jogue na barra de pesquisa do seu navegador, no momento não vai aparecer nada pois o Nginx ainda não foi instalado, mas será usado posteriormente para verificar a página HTML criada.
+![Image](https://github.com/user-attachments/assets/1dd7a089-91ca-4864-8a85-adc7ddef2ca6)
+
 Para acessar a instância via SSH primeiro se deve alterar as permissões da chave .pem para somente leitura e na página da AWS "Instances" clique no botão "Connect" que fica na parte de cima, e clique na opção "SSH client" e copie o "Example" para colar posteriormente no VS Code.
 
 No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Microsoft, e abra um novo terminal e colo o código copiado. Exemplo:
@@ -102,9 +106,7 @@ Após salvar seu arquvio HTML, use este comando para reiniciar o Nginx para atua
 ```
 sudo systemctl restart nginx
 ```
-Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
-![Image](https://github.com/user-attachments/assets/1dd7a089-91ca-4864-8a85-adc7ddef2ca6)
-
+Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" igual mostrado em um print anteriormente e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
 
 Após colar o IPv4 da sua Instância na barra de pesquisa do navegador, a página irá abrir desta forma:
 ![Image](https://github.com/user-attachments/assets/69905e7b-3d73-4de1-ac5e-da7d21d2f81c)
