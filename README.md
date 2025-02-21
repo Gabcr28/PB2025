@@ -29,6 +29,10 @@ Em "key pair(login)" selecione uma chave .pem ou crie uma caso não tenha uma j�
 
 Em "Network settings" selecione a VPC criada e uma subnet pública da VPC criada, deixe "Enable" a opção "Auto-assign public IP" para ser possível acessar a instância via SSH e selecione um Security Group Com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4.
 
+Obs: Caso você queria usar a implementação de UserData na criação da instância e já instalar com Nginx, Cron, HTML simples e script de monitoramento vá até o tópico "Bônus", adiante estas configurações serão instaladas manualmente
+
+E após isto clique em "Launch Instance"
+
 ### Acessar a instância via SSH:
 Para acessar a instância via SSH primeiro se deve alterar as permissões da chave .pem para somente leitura e na página da AWS "Instances" clique no botão "Connect" que fica na parte de cima, e clique na opção "SSH client" e copie o "Example" para colar posteriormente no VS Code.
 
@@ -36,9 +40,10 @@ No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Mi
 ```
 ssh -i "caminho/para/sua/chave.pem" ec2-user@ec2-44-199-191-13.compute-1.amazonaws.com
 ```
-Após colar no VS Code com o caminho da sua chave.pem e ela estando com a permisão de somente leitura, irá aparecer a uma opção para você digitar "yes" e depois você estará conectado.
+Após colar no VS Code com o caminho da sua chave.pem e ela estando com a permisão de somente leitura, irá aparecer a uma opção para você digitar "yes" e depois você estará conectado. Print:
 
-Obs: Caso você queria usar a implementação de UserData na criação da instância e já instalar com Nginx, Cron, HTML simples e script de monitoramento vá até o tópico "Bônus"
+![Image](https://github.com/user-attachments/assets/649870fa-f122-4224-80d0-56cea7037596)
+
 
 ## Etapa 2: Configuração do Servidor Web:
 ### Instalar o servidor Nginx na EC2:
