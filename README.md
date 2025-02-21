@@ -1,6 +1,13 @@
 # Projeto: Configuração de Servidor Web com Monitoramento
 Objetivo: Desenvolver e testar habilidades em Linux, AWS e automação de processos através da configuração de um ambiente de servidor web monitorado.
 
+## Tecnologias Utilizadas
+AWS EC2 Amazon Linux 2023 AMI
+
+Visual Studio Code 1.97.2
+
+Serviços Nginx 1.26.2 e Cron na instância EC2
+
 ## Etapa 1: Configuração do Ambiente Tarefas:
 ### Criar uma VPC na AWS:
 Entre na sua conta AWS e pesquise o serviço VPC, entrando na página irá aparecer um botão amarelo escrito "Create VPC" clique nele.
@@ -30,6 +37,8 @@ No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Mi
 ssh -i "caminho/para/sua/chave.pem" ec2-user@ec2-44-199-191-13.compute-1.amazonaws.com
 ```
 Após colar no VS Code com o caminho da sua chave.pem e ela estando com a permisão de somente leitura, irá aparecer a uma opção para você digitar "yes" e depois você estará conectado.
+
+Obs: Caso você queria usar a implementação de UserData na criação da instância e já instalar com Nginx, Cron, HTML simples e script de monitoramento vá até o tópico "Bônus"
 
 ## Etapa 2: Configuração do Servidor Web:
 ### Instalar o servidor Nginx na EC2:
@@ -199,3 +208,63 @@ E verifique no Discord se o Webhook está respondendo no canal do seu servidor e
 
 ## Bônus (Opcional):
 ### Automação com User Data:
+Configurar a EC2 para já iniciar com Nginx, HTML e script de monitoramento via User Data
+```bash
+#!/bin/bash
+# Atualizar o sistema
+yum update -y
+
+# Instalar Nginx
+amazon-linux-extras enable nginx1 -y
+yum install nginx -y
+
+# Iniciar e habilitar o serviço Nginx
+systemctl enable nginx
+systemctl start nginx
+
+#Instalar cronie
+yum install cronie -y
+
+# Iniciar e habilitar o serviço Cronie
+systemctl enable cronie
+systemctl start cronie
+
+# Criar uma página HTML simples
+cat <<EOF > /usr/share/nginx/html/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor Nginx na Amazon EC2</title>
+</head>
+<body>
+    <h1>Sucesso! Nginx está funcionando na Amazon EC2!</h1>
+</body>
+</html>
+EOF
+
+# Garantir permissão de leitura no arquivo HTML
+chmod 644 /usr/share/nginx/html/index.html
+
+# Criar script de monitoramento
+cat <<EOF > /usr/local/bin/monitor_nginx.sh
+#!/bin/bash
+# Verifica se o Nginx está rodando e reinicia se necessário
+if systemctl is-active --quiet nginx; then
+    echo "\$(date): Nginx está funcionando." >> /var/log/monitor_nginx.log
+else
+    echo "\$(date): Nginx caiu, reiniciando..." >> /var/log/monitor_nginx.log
+    sudo systemctl restart nginx
+fi
+EOF
+
+# Tornar o script executável
+chmod +x /usr/local/bin/monitor_nginx.sh
+
+# Adicionar o script ao cron para rodar a cada 1 minuto
+(crontab -l 2>/dev/null; echo "* * * * * /usr/local/bin/monitor_nginx.sh") | crontab -
+
+# Reiniciar o serviço cron para aplicar a nova configuração
+systemctl restart crond
+```
