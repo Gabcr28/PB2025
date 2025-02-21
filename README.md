@@ -216,7 +216,11 @@ E verifique no Discord se o Webhook está respondendo no canal do seu servidor e
 
 ## Bônus (Opcional):
 ### Automação com User Data:
-Configurar a EC2 para já iniciar com Nginx, HTML e script de monitoramento via User Data
+Configurar a EC2 para já iniciar com Nginx, HTML e script de monitoramento via User Data.
+Na tela de criação de instância após fazer o restante das configurações no tópico de criação de instância, clique em "Advanced details"
+![Image](https://github.com/user-attachments/assets/ae4cd0f1-6d70-4279-a40e-954fbbd41984)
+
+e nesta caixa de texto coloque este script 
 ```bash
 #!/bin/bash
 # Atualizar o sistema
