@@ -129,7 +129,7 @@ sudo nano /usr/local/bin/renicio.sh
 # Configuração
 URL="http://localhost"  # Altere para a URL do seu site
 
-# Verifica se o site responde corretamente
+# Verifica se o site responde corretamente e reinicia o nginx caso necessário
 if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
 else
     sudo systemctl restart nginx
@@ -163,7 +163,7 @@ sudo nano /usr/local/bin/renicio.sh
 
 # Configuração
 URL="http://localhost"  # Altere para a URL do seu site
-LOG_FILE="/var/log/monitoramento.log"
+LOG_FILE="/var/log/monitoramento.log" # Caminho para o script de monitoramento
 
 # Verifica se o site responde corretamente
 if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
@@ -190,8 +190,8 @@ sudo nano /usr/local/bin/renicio.sh
 
 # Configuração
 URL="http://localhost"  # Altere para a URL do seu site
-LOG_FILE="/var/log/monitoramento.log"
-DISCORD_WEBHOOK="https://discord.com/api/webhooks/SEU_WEBHOOK"
+LOG_FILE="/var/log/monitoramento.log" # Caminho para o script de monitoramento
+DISCORD_WEBHOOK="https://discord.com/api/webhooks/SEU_WEBHOOK" # Altere para o URL do seu Discord Webhook
 
 # Função para enviar alerta para o Discord
 enviar_notificacao() {
@@ -199,7 +199,7 @@ enviar_notificacao() {
     curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$mensagem\"}" $DISCORD_WEBHOOK
 }
 
-# Verifica se o site responde corretamente
+# Verifica se o site responde corretamente e reinicia o nginx caso necessário
 if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
 then
     echo "$(date) - O site está online." >> $LOG_FILE
