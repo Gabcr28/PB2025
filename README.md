@@ -34,10 +34,11 @@ Obs: Caso você queria usar a implementação de UserData na criação da instâ
 
 E após isto clique em "Launch Instance"
 
-### Acessar a instância via SSH:
-Para acessar a página da sua instância copie este IP e jogue na barra de pesquisa do seu navegador, no momento não vai aparecer nada pois o Nginx ainda não foi instalado, mas será usado posteriormente para verificar a página HTML criada.
+E após lançar a instância, para acessar a página da sua instância copie este IP e jogue na barra de pesquisa do seu navegador, no momento não vai aparecer nada pois o Nginx ainda não foi instalado, mas será usado posteriormente para verificar a página HTML criada.
 ![Image](https://github.com/user-attachments/assets/1dd7a089-91ca-4864-8a85-adc7ddef2ca6)
 
+
+### Acessar a instância via SSH:
 Para acessar a instância via SSH primeiro se deve alterar as permissões da chave .pem para somente leitura e na página da AWS "Instances" clique no botão "Connect" que fica na parte de cima, e clique na opção "SSH client" e copie o "Example" para colar posteriormente no VS Code.
 
 No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Microsoft, e abra um novo terminal e colo o código copiado. Exemplo:
