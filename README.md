@@ -206,7 +206,7 @@ sudo systemctl restart nginx
 Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" igual mostrado em um print anteriormente e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
 
 Após colar o IPv4 da sua Instância na barra de pesquisa do navegador, a página irá abrir desta forma:
-![Image](https://github.com/user-attachments/assets/3ec7255a-d1da-4632-99d6-4a4411a273b2)
+![Image](https://github.com/user-attachments/assets/1c3faf77-c535-4312-9568-eb6288b9834b)
 Após isto vamos configurar o Nginx para reiniciar automaticamente a cada minuto. Primeiro instale o cronie:
 ```
 sudo yum install cronie -y
@@ -473,7 +473,7 @@ chmod +x /usr/local/bin/monitor_nginx.sh
 systemctl restart crond
 ```
 E após alguns minutos, acessando o IPv4 desta instância criada aparecerá a seguinte tela:
-![Image](https://github.com/user-attachments/assets/3ec7255a-d1da-4632-99d6-4a4411a273b2)
+![Image](https://github.com/user-attachments/assets/1c3faf77-c535-4312-9568-eb6288b9834b)
 Se você não editou o HTML sugerido neste script de User Data, o aparecimento desta tela significa que funcionou perfeitamente.
 ## Conclusão:
 Neste projeto foi guiada a criação de uma VPC simples, um Security Group e uma EC2 dentro da AWS e configurado dentro da EC2 um servidor Nginx com script de monitoramento e webhook via Discord e mostrando o passo a passo da criação e configuração da instância e com opção da implementação do User Data.
