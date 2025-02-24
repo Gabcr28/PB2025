@@ -18,8 +18,13 @@ Na opção "Name tag auto-generation" deixe a opção "Auto-generate" e preencha
 
 Para este projeto deixe o restante das configurações como padrão, e clique em "Create VPC" e a VPC estará pronta para ser usada.
 
+### Criar um Security Group na AWS:
+Dentro da AWS pesquise pelo serviço EC2, entrando na página clique na parte esquerda da tela no tópico "Network Settings" na opção "Security Group".
+
+Clique no botão amarelo no canto superior direito da tela escrito "Create security group". Entrando na página de criação do Security Group, para ser possível acessar a instância via SSH e selecione um Security Group Com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4. 
+
 ### Criar uma instância EC2 na AWS:
-Dentro da AWS pesquise pelo serviço EC2, entrando na página clique na parte esquerda da tela a opção "Instances" e carregando a página clique no botão amarelo escrito "Launch instances" no canto superior direito.
+Dentro da AWS pesquise pelo serviço EC2, entrando na página clique na parte esquerda da tela na opção "Instances" e carregando a página clique no botão amarelo escrito "Launch instances" no canto superior direito.
 
 Após nomear sua instância, na parte de "Application and OS Images (Amazon Machine Image)" selecione o Amazon Linux 2023 AMI que será o utilizado neste projeto.
 
@@ -27,7 +32,7 @@ Em "Instance type" será utilizado "t2.micro".
 
 Em "key pair(login)" selecione uma chave .pem ou crie uma caso não tenha uma já criada e faça o download da chave .pem em sua máquina.
 
-Em "Network settings" selecione a VPC criada e uma subnet pública da VPC criada, deixe "Enable" a opção "Auto-assign public IP" para ser possível acessar a instância via SSH e selecione um Security Group Com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4. 
+Em "Network settings" selecione a VPC criada e uma subnet pública da VPC criada, deixe "Enable" a opção "Auto-assign public IP" para ser possível acessar a instância via SSH e selecione a Security Group criada anteriormente com as regras de Inbound e Outbound com HTTP na porta 80 para Anywhere-IPv4 e SSH na porta 22 para Anywhere-IPv4. 
 
 
 Obs: Caso você queria usar a implementação de UserData na criação da instância e já instalar com Nginx, Cron, HTML simples e script de monitoramento vá até o tópico "Bônus", adiante estas configurações serão instaladas manualmente
@@ -41,7 +46,7 @@ E após lançar a instância, para acessar a página da sua instância copie est
 ### Acessar a instância via SSH:
 Para acessar a instância via SSH primeiro se deve alterar as permissões da chave .pem para somente leitura e na página da AWS "Instances" clique no botão "Connect" que fica na parte de cima, e clique na opção "SSH client" e copie o "Example" para colar posteriormente no VS Code.
 
-No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Microsoft, e abra um novo terminal e colo o código copiado. Exemplo:
+No Visual Studio Code instale a extensão "Remote - SSH" disponibilizado pela Microsoft, e abra um novo terminal e cole o código copiado. Exemplo:
 ```
 ssh -i "caminho/para/sua/chave.pem" ec2-user@ec2-44-199-191-13.compute-1.amazonaws.com
 ```
@@ -124,6 +129,7 @@ Após habilitar o crond iremos criar um arquivo .sh para rodar a cada minuto no 
 ```
 sudo nano /usr/local/bin/renicio.sh
 ```
+Conteúdo a ser inserido no arquivo "reinicio.sh"
 ```bash
 #!/bin/bash
 
@@ -136,7 +142,7 @@ else
     sudo systemctl restart nginx
 fi
 ```
-E para fazer o arquvio criada para rodar a cada minuto, digite:
+E para fazer o arquvio criado rodar a cada minuto, digite:
 ```
 crontab -e
 ```
@@ -159,6 +165,7 @@ Para criar um script de monitoramento podemos apenas modificar o arquivo reinici
 ```
 sudo nano /usr/local/bin/renicio.sh
 ```
+Contéudo do arquivo "reinicio.sh" após modificação:
 ```bash
 #!/bin/bash
 
@@ -182,10 +189,11 @@ sudo chmod 666 /var/log/monitoramento.log
 ### Enviar uma notificação via Discord se detectar indisponibilidade.
 Para adicionarmos essa funcionalidade primeiro abra seu discord, clique com o botão esquerdo do mouse no seu servidor, vá em configurações do servidor e depois clique em integrações. Depois clique em Webhooks, crie um Webhook caso não tenha e selecione o canal que ele irá enviar as notificações e copie o URL.
 
-No terminal edite o arquivo reinicio.sh
+No terminal edite novamente o arquivo reinicio.sh
 ```
 sudo nano /usr/local/bin/renicio.sh
 ```
+Arquivo "reinicio.sh" modificado:
 ```bash
 #!/bin/bash
 
@@ -223,7 +231,7 @@ Configurar a EC2 para já iniciar com Nginx, HTML e script de monitoramento via 
 Na tela de criação de instância após fazer o restante das configurações no tópico de criação de instância, clique em "Advanced details"
 ![Image](https://github.com/user-attachments/assets/ae4cd0f1-6d70-4279-a40e-954fbbd41984)
 
-e nesta caixa de texto coloque este script 
+e nesta caixa de texto coloque este script bash
 ```bash
 #!/bin/bash
 # Atualizar o sistema
@@ -283,3 +291,6 @@ chmod +x /usr/local/bin/monitor_nginx.sh
 # Reiniciar o serviço cron para aplicar a nova configuração
 systemctl restart crond
 ```
+
+## Conclusão:
+Neste projeto foi guiada a criação de uma VPC simples, um Security Group e uma EC2 dentro da AWS e configurado dentro da EC2 um servidor Nginx com script de monitoramento e webhook via Discord e mostrando o passo a passo da criação e configuração da instância e com opção da implementação do User Data.
