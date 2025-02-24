@@ -95,16 +95,107 @@ Neste exemplo será modificado o arquvio index.html que vem por padrão do Nginx
 ```
 sudo nano /usr/share/nginx/html/index.html
 ```
+Código HTML sugerido:
 ```hmtl
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servidor Nginx na Amazon EC2</title>
+    <title>ProjetoLinuxPB</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background-color: white;
+        }
+
+        h1 {
+            color: #4a90e2;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .info-section {
+            background-color: #34495e;
+            padding: 50px 20px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #f1c40f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Sucesso! Nginx está funcionando na Amazon EC2!</h1>
+    <header>
+        <h1><a href="https://github.com/Gabcr28/ProjetoLinuxPB/tree/main" target="_blank" style="text-decoration: none; color: #4a90e2;">ProjetoLinuxPB</a></h1>
+        <p>Objetivo: Desenvolver e testar habilidades em Linux, AWS e automação de processos através da configuração de um ambiente de servidor web monitorado.<br>Informações relacionadas:</p>
+    </header>
+
+    <section class="info-section">
+        <div class="cards-container">
+            <div class="card">
+                <h3>EC2 AWS</h3>
+                <p>É um serviço da AWS que fornece capacidade computacional escalável na nuvem. Essencialmente, são servidores virtuais que você pode configurar para executar aplicativos, com controle total sobre o sistema operacional, armazenamento e rede.</p>
+            </div>
+            <div class="card">
+                <h3>VPC AWS</h3>
+                <p>Permite criar uma rede virtual isolada na AWS, com controle total sobre IPs, sub-redes e tabelas de roteamento, garantindo segurança e personalização.</p>
+            </div>
+            <div class="card">
+                <h3>Visual Studio Code</h3>
+                <p>Editor de código-fonte leve e poderoso da Microsoft, com suporte a diversas linguagens de programação e extensões. É gratuito e multiplataforma.</p>
+            </div>
+            <div class="card">
+                <h3>Cron</h3>
+                <p>Agendador de tarefas automatizadas no Linux. Permite a execução de comandos ou scripts em horários específicos para tarefas como backups e envio de e-mails.</p>
+            </div>
+            <div class="card">
+                <h3>Nginx</h3>
+                <p>Servidor web de alto desempenho e proxy reverso. Distribui tráfego de forma eficiente, pode atuar como balanceador de carga, melhorando a escalabilidade.</p>
+            </div>
+            <div class="card">
+                <h3>Discord Webhook</h3>
+                <p>Ferramenta que envia mensagens automáticas para um canal do Discord a partir de outros aplicativos, útil para atualizações de software, alertas e monitoramento.</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
 ```
@@ -115,7 +206,7 @@ sudo systemctl restart nginx
 Agora dentro da AWS na página "Instances" clique na caixa de seleção da sua Instância e copie o "Public IPv4 Address" igual mostrado em um print anteriormente e cole na barra de pesquisa do seu navegador e deverá abrir a página HTML que você colocou no diretório /usr/share/nginx/html/index.html. Print da localização do "Public IPv4 Address"
 
 Após colar o IPv4 da sua Instância na barra de pesquisa do navegador, a página irá abrir desta forma:
-![Image](https://github.com/user-attachments/assets/69905e7b-3d73-4de1-ac5e-da7d21d2f81c)
+![Image](https://github.com/user-attachments/assets/3ec7255a-d1da-4632-99d6-4a4411a273b2)
 Após isto vamos configurar o Nginx para reiniciar automaticamente a cada minuto. Primeiro instale o cronie:
 ```
 sudo yum install cronie -y
@@ -255,14 +346,104 @@ systemctl start cronie
 # Criar uma página HTML simples
 cat <<EOF > /usr/share/nginx/html/index.html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servidor Nginx na Amazon EC2</title>
+    <title>ProjetoLinuxPB</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background-color: white;
+        }
+
+        h1 {
+            color: #4a90e2;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .info-section {
+            background-color: #34495e;
+            padding: 50px 20px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #f1c40f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Sucesso! Nginx está funcionando na Amazon EC2!</h1>
+    <header>
+        <h1><a href="https://github.com/Gabcr28/ProjetoLinuxPB/tree/main" target="_blank" style="text-decoration: none; color: #4a90e2;">ProjetoLinuxPB</a></h1>
+        <p>Objetivo: Desenvolver e testar habilidades em Linux, AWS e automação de processos através da configuração de um ambiente de servidor web monitorado.<br>Informações relacionadas:</p>
+    </header>
+
+    <section class="info-section">
+        <div class="cards-container">
+            <div class="card">
+                <h3>EC2 AWS</h3>
+                <p>É um serviço da AWS que fornece capacidade computacional escalável na nuvem. Essencialmente, são servidores virtuais que você pode configurar para executar aplicativos, com controle total sobre o sistema operacional, armazenamento e rede.</p>
+            </div>
+            <div class="card">
+                <h3>VPC AWS</h3>
+                <p>Permite criar uma rede virtual isolada na AWS, com controle total sobre IPs, sub-redes e tabelas de roteamento, garantindo segurança e personalização.</p>
+            </div>
+            <div class="card">
+                <h3>Visual Studio Code</h3>
+                <p>Editor de código-fonte leve e poderoso da Microsoft, com suporte a diversas linguagens de programação e extensões. É gratuito e multiplataforma.</p>
+            </div>
+            <div class="card">
+                <h3>Cron</h3>
+                <p>Agendador de tarefas automatizadas no Linux. Permite a execução de comandos ou scripts em horários específicos para tarefas como backups e envio de e-mails.</p>
+            </div>
+            <div class="card">
+                <h3>Nginx</h3>
+                <p>Servidor web de alto desempenho e proxy reverso. Distribui tráfego de forma eficiente, pode atuar como balanceador de carga, melhorando a escalabilidade.</p>
+            </div>
+            <div class="card">
+                <h3>Discord Webhook</h3>
+                <p>Ferramenta que envia mensagens automáticas para um canal do Discord a partir de outros aplicativos, útil para atualizações de software, alertas e monitoramento.</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
 EOF
@@ -291,6 +472,8 @@ chmod +x /usr/local/bin/monitor_nginx.sh
 # Reiniciar o serviço cron para aplicar a nova configuração
 systemctl restart crond
 ```
-
+E após alguns minutos, acessando o IPv4 desta instância criada aparecerá a seguinte tela:
+![Image](https://github.com/user-attachments/assets/3ec7255a-d1da-4632-99d6-4a4411a273b2)
+Se você não editou o HTML sugerido neste script de User Data, o aparecimento desta tela significa que funcionou perfeitamente.
 ## Conclusão:
 Neste projeto foi guiada a criação de uma VPC simples, um Security Group e uma EC2 dentro da AWS e configurado dentro da EC2 um servidor Nginx com script de monitoramento e webhook via Discord e mostrando o passo a passo da criação e configuração da instância e com opção da implementação do User Data.
