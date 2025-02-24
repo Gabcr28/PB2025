@@ -476,4 +476,6 @@ E após alguns minutos, acessando o IPv4 desta instância criada aparecerá a se
 ![Image](https://github.com/user-attachments/assets/1c3faf77-c535-4312-9568-eb6288b9834b)
 Se você não editou o HTML sugerido neste script de User Data, o aparecimento desta tela significa que funcionou perfeitamente.
 ## Conclusão:
-Neste projeto foi guiada a criação de uma VPC simples, um Security Group e uma EC2 dentro da AWS e configurado dentro da EC2 um servidor Nginx com script de monitoramento e webhook via Discord e mostrando o passo a passo da criação e configuração da instância e com opção da implementação do User Data.
+Este projeto aborda desde a criação de uma VPC e a configuração de um Security Group até a implantação de uma instância EC2 com um servidor Nginx funcional. A implementação de um sistema de monitoramento automatizado garante a alta disponibilidade do serviço, reiniciando o Nginx automaticamente em caso de falha e enviando notificações em tempo real.
+
+Por fim, o uso de User Data para automação inicial mostra como é possível otimizar o tempo de configuração e garantir que o servidor esteja pronto para uso desde o momento em que a instância é lançada. Com este projeto, as habilidades adquiridas são diretamente aplicáveis em cenários reais de administração de sistemas, monitoramento e automação em ambientes de produção.
