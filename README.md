@@ -472,6 +472,8 @@ chmod +x /usr/local/bin/monitor_nginx.sh
 # Reiniciar o serviço cron para aplicar a nova configuração
 systemctl restart crond
 ```
+Neste UserData o script de monitoramento não está vinculado diretamento a URL do site e sim ao Nginx instalado para não ser preciso modificar o script com a URL do site.
+
 E após alguns minutos, acessando o IPv4 desta instância criada aparecerá a seguinte tela:
 ![Image](https://github.com/user-attachments/assets/1c3faf77-c535-4312-9568-eb6288b9834b)
 Se você não editou o HTML sugerido neste script de User Data, o aparecimento desta tela significa que funcionou perfeitamente.
