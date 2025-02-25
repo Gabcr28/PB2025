@@ -233,6 +233,7 @@ else
     sudo systemctl restart nginx
 fi
 ```
+Obs: esse script de monitoramento está ligado ao URL se você quiser ligá-lo diretamento ao funcionamento do Nginx dê uma olhada no User Data do tópico "Bônus"
 E para fazer o arquvio criado rodar a cada minuto, digite:
 ```
 crontab -e
