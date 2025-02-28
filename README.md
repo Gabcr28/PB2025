@@ -225,7 +225,7 @@ Conteúdo a ser inserido no arquivo "reinicio.sh"
 #!/bin/bash
 
 # Configuração
-URL="http://localhost"  # Altere para a URL do seu site
+URL="http://localhost"  # Altere para a URL do seu site ou deixa desta forma para pegar o IP atual da sua isntância
 
 # Verifica se o site responde corretamente e reinicia o nginx caso necessário
 if curl -s --head --request GET $URL | grep "200 OK" > /dev/null
@@ -263,7 +263,7 @@ Contéudo do arquivo "reinicio.sh" após modificação:
 #!/bin/bash
 
 # Configuração
-URL="http://localhost"  # Altere para a URL do seu site
+URL="http://localhost"  # Altere para a URL do seu site ou deixa desta forma para pegar o IP atual da sua isntância
 LOG_FILE="/var/log/monitoramento.log" # Caminho para o script de monitoramento
 
 # Verifica se o site responde corretamente
@@ -291,7 +291,7 @@ Arquivo "reinicio.sh" modificado:
 #!/bin/bash
 
 # Configuração
-URL="http://localhost"  # Altere para a URL do seu site
+URL="http://localhost"  # Altere para a URL do seu site ou deixa desta forma para pegar o IP atual da sua isntância
 LOG_FILE="/var/log/monitoramento.log" # Caminho para o script de monitoramento
 DISCORD_WEBHOOK="https://discord.com/api/webhooks/SEU_WEBHOOK" # Altere para o URL do seu Discord Webhook
 
