@@ -7,3 +7,7 @@ Instruções:
 
 - Exemplo de aplicação: Use a landing.page do TailwindCSS como site estático dentro do container.
 
+- Resolução:
+
+  '''
+  '''
