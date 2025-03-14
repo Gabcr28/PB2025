@@ -152,3 +152,84 @@ docker run -p 5000:5000 flaskapp
 http://localhost:5000/
 ```
 
+## 5. Criando e utilizando volumes para persistência de dados
+Instruções:
+- Execute um container MySQL e configure um volume para armazenar os dados do banco de forma persistente.
+- Exemplo de aplicação: Use o sistema de login e cadastro do Laravel Breeze, que usa MySQL.
+
+5.1 - Baixar imagem MySQL no terminal Docker Desktop:
+```
+docker pull mysql
+```
+
+5.2 - Criar volume no terminal do Docker Desktop:
+```
+docker volume create mysql-data
+```
+
+5.3 - Iniciar container MySQL com o volume criado:
+```
+docker run -d --name mysql-ct -e MYSQL_ROOT_PASSWORD=senha -v mysql-data:/var/lib/mysql mysql
+```
+
+5.4 - Verificar quais containers estão usando o volume criado:
+```
+docker ps -a --filter volume=mysql-data
+```
+
+OBS: Não consegui realizar o exemplo de aplicação
+
+## 6. Criando e rodando um container multi-stage
+- Utilize um multi-stage build para otimizar uma aplicação Go, reduzindo o tamanho da imagem final.
+- Exemplo de aplicação: Compile e rode a API do Go Fiber Example dentro do container.
+
+6.1 - No terminal Docker Desktop baixar imagens
+```
+docker pull golang
+docker pull alpine
+```
+
+6.2 - Criar uma pasta e dentro dela criar um arquivo app.go com o conteúdo:
+```Go
+package main
+import (
+    "fmt"
+)
+
+func main() {
+  fmt.Println("Qual é o seu nome:? ")
+  var name string
+  fmt.Scanln(&name)
+  fmt.Printf("Oi, %s! Eu sou a linguagem Go! ", name)
+}
+```
+
+6.3 - Na pasta do app.go criar um arquivo Dockerfile com o conteúdo:
+```Dockerfile
+FROM golang as exec
+
+COPY app.go /go/src/app/
+
+ENV GO111MODULE=auto
+
+WORKDIR /go/src/app
+
+RUN go build -o app.go .
+
+FROM alpine
+
+WORKDIR /appexec
+COPY --from=exec /go/src/app/ /appexec
+RUN chmod -R 755 /appexec
+ENTRYPOINT ./app.go
+```
+
+6.4 - Dentro do terminal no diretório do Dockerfile:
+```
+docker image build -t appgo .
+docker run -ti --name meugo appgo
+```
+
+OBS: o link do repositório Go Fiber Exemple está dando a mensagem "404 - page not found"
+
+## 7.
