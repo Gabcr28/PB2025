@@ -180,6 +180,7 @@ docker ps -a --filter volume=mysql-data
 OBS: Não consegui realizar o exemplo de aplicação
 
 ## 6. Criando e rodando um container multi-stage
+Instruções:
 - Utilize um multi-stage build para otimizar uma aplicação Go, reduzindo o tamanho da imagem final.
 - Exemplo de aplicação: Compile e rode a API do Go Fiber Example dentro do container.
 
@@ -232,4 +233,157 @@ docker run -ti --name meugo appgo
 
 OBS: o link do repositório Go Fiber Exemple está dando a mensagem "404 - page not found"
 
-## 7.
+## 7. Construindo uma rede Docker para comunicação entre containers
+Instruções:
+- Crie uma rede Docker personalizada e faça dois containers, um Node.js e um MongoDB, se comunicarem
+- Exemplo de aplicação: utilize o projeto MEAN Todos para criar um app de tarefas usando Node.js + MongoDB
+
+7.1 - Criar rede no terminal Docker Desktop
+```
+docker network create minha-rede
+```
+
+7.2 - Crie uma pasta e dentro dela crie o arquivo Dockerfile:
+```Dockerfile
+FROM node:14
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+```
+
+7.3 - Criar arquivo docker-compose.yml dentro do diretório do Dockerfile com o conteúdo:
+```YAML
+version: '3'
+services:
+  node-app:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - minha-rede
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    external: true
+
+#dentro do diretorio cirar app.js
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+const port = 3000;
+
+// Conectar ao MongoDB
+mongoose.connect('mongodb://mongo:27017/todos', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Definir um modelo simples para as tarefas
+const todoSchema = new mongoose.Schema({
+  task: String,
+  completed: Boolean
+});
+
+const Todo = mongoose.model('Todo', todoSchema);
+
+// Middleware para parsear JSON
+app.use(express.json());
+
+// Rota para adicionar uma nova tarefa
+app.post('/todos', async (req, res) => {
+  const todo = new Todo(req.body);
+  try {
+    await todo.save();
+    res.status(201).send(todo);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Rota para listar todas as tarefas
+app.get('/todos', async (req, res) => {
+  try {
+    const todos = await Todo.find();
+    res.status(200).send(todos);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Iniciar o servidor
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+7.4 - Criar arquivo package.json dentro do diretório do Dockerfile com o conteúdo:
+```JSON
+{
+  "name": "mean-todos",
+  "version": "1.0.0",
+  "description": "A simple MEAN stack todo app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
+```
+
+7.5 - Cronstruir e iniciar conatiner
+```
+docker-compose up --build
+```
+
+7.6 - Acessar no navegador:
+```
+http://localhost:3000/todos
+```
+
+7.7 - Enviar requisição para ser salva no banco de dados e exibida acessando o link acima:
+```
+curl -X POST http://localhost:3000/todos -H "Content-Type: application/json" -d "{\"task\": \"Comprar leite\", \"completed\": false}"
+```
+
+OBS: Link do MEAN Todos não encontra repositório
+
+## 8. Criando um compose file para rodar uma aplicação com banco de dados
+Instruções:
+- Utilize Docker Compose para configurar uma aplicação Django com um banco de dados PostgreSQL.
+- Exemplo de aplicação: Use o projeto Django Polls App para criar uma pesquisa de opinião integrada ao banco.
+
+8.1 - Clonei o repositório Git pelo terminal:
+```
+git clone https://github.com/devmahmud/Django-Poll-App.git
+```
+
+8.2 - Dentro da pasta do repositório Git criar arquivo 
