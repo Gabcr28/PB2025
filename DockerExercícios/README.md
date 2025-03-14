@@ -386,4 +386,101 @@ Instruções:
 git clone https://github.com/devmahmud/Django-Poll-App.git
 ```
 
-8.2 - Dentro da pasta do repositório Git criar arquivo 
+8.2 - Dentro da pasta do repositório Git criar arquivo docker-compose.yml
+```YAML
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: pollsdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+```
+
+8.3 - Crie o arquivo Dockerfile dentro do diretório do docker-compose com o conteúdo:
+```Dockerfile
+FROM python:3.9-slim
+
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+
+COPY . /code/
+```
+
+8.4 - Modifique o arquivo requirements.txt e adicione a linha:
+```
+psycopg2-binary>=2.9.3
+```
+
+8.5 - Dentro do diretório Django-Poll-App na pasta poolme, modifique o arquivo settings, procure por DATABASES e coloque:
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pollsdb',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
+```
+
+8.6 - Dentro do terminal do Docker Desktop, no diretório do docker-compose.yml:
+```
+docker-compose up --build
+```
+
+8.7 - Para ter permissão de cirar pesquisas crie o super usuário, no terminal Docker Desktop no diretório do docker-compose.yml digite:
+```
+docker-compose run web python manage.py createsuperuser
+```
+
+8.8 - Após criar o super usuário no terminal você pode acessar pelo navegador e ao usar o login e senha criados pode criar as pesquisas. Link para acessar no navegador:
+```
+http://localhost:8000
+```
+
+## 9. Criando uma imagem personalizada com um servidor web e arquivos estáticos
+- Construa uma imagem baseada no Nginx ou Apache, adicionando um site HTML/CSS estático.
+- Exemplo de aplicação: Utilize a landing page do Creative Tim para criar uma página moderna hospedada no container.
+
+9.1 - Baixei a landing page pelo Link do Repositório deixado na atividade e dentro da pasta da página eu criei o arquivo Dockerfile com o conteúdo:
+```Dockerfile
+FROM nginx:latest
+
+COPY . /usr/share/nginx/html
+
+EXPOSE 80
+```
+
+9.2 - Dentro do terminal Docker Desktop na pasta do Dockerfile:
+```
+docker build -t exnginx /diretorio/do/dockerfile
+docker run -d -p 8080:80 exnginx
+```
+
+9.3 - Acessar no navegador web. Link:
+```
+http://localhost:8080
+```
