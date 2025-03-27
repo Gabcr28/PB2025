@@ -21,7 +21,6 @@ Na parte de "Inbound rules" clique em add rules e adicione estas regras:
 Type: SSH  Port:22  Source type: Anywhere-IPv4 #Para acessar a instância via SSH
 Type: HTTP  Port:80  Source type: Anywhere-IPv4 #Para acessar o Wordpress
 Type: MySQL/Aurora  Port:3306 Source type: Anywhere-IPv4 #Conexão Instância com banco de dados
-Type: SSH  Port:22  Source type: My IP 
 ```
 Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 ```
