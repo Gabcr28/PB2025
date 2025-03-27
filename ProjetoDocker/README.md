@@ -1,1 +1,2 @@
 # Projeto Docker
+## Tecnologias utilizadas
