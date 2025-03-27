@@ -15,7 +15,7 @@ MySQL Workbench 8.0.41 Community
 ```
 Type: SSH  Port:22  Source type: Anywhere #Para acessar a instância via SSH
 Type: HTTP  Port:80  Source type: Anywhere #Para acessar o Wordpress
-Type: NFS  Port:2049  Source type: Anywhere #Conexão Instância com banco de dados
+Type: MySQL/Aurora  Port:3306 Source type: Anywhere #Conexão Instância com banco de dados
 Type: SSH  Port:22  Source type: Anywhere
 ```
 ## Criação da instância EC2
