@@ -27,6 +27,7 @@ Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 ```
 Type: All traffic  Port:All  Source type: Anywhere-IPv4 
 ```
+Clique no botão amarelo "Create security group"
 ## Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
