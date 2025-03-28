@@ -41,10 +41,9 @@ No "Firewall (security groups)" selecione o security group criado anteriormente.
 
 Role para baixo e clique na opção "Advanced details" e em seguida procure a opção "User data - optional".
 
-no campo de texto de User data insira:
+no campo de texto de User data, para criar uma instância com docker instalado insira:
 ```
 #!/bin/bash
-# User Data para WordPress + Docker
 
 # Atualiza o sistema
 sudo dnf update -y
@@ -67,5 +66,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 # Inicia o WordPress com Docker Compose
 docker-compose up -d
-
 ```
