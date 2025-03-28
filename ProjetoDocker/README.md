@@ -27,14 +27,14 @@ Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 ```
 Type: All traffic  Port:All  Source type: Anywhere-IPv4 
 ```
-Clique no botão amarelo "Create security group"
+Clique no botão amarelo "Create security group".
 ## Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
 Dentro da página de criação de instância,em "Application and OS Images (Amazon Machine Image)" selecione a imagem "Amazon Linux 2023 AMI"
 
-Na opção "Key pair (login)" crie uma chave .pem ou use uma já criada
+Na opção "Key pair (login)" crie uma chave .pem ou use uma já criada.
 
 Em "Network settings" clique no botão "Edit", use uma VPC com configuração padrão, em "Auto-assign public IP" deixe como "Enable"
 
-No "Firewall (security groups)" crie um security group com as regras Inbound:
+No "Firewall (security groups)" selecione o security group criado anteriormente.
