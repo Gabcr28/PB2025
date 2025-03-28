@@ -11,7 +11,7 @@ Visual Studio Code 1.97.2
 MySQL Workbench 8.0.41 Community
 
 ## 1. Instalação e configuração do DOCKER no host EC2
-## Criação do Security group
+### Criação do Security group
 Dentro da AWS pesquise por EC2 e entre na página, dentro da página na esquerda procure por "Security Groups" e clique.
 
 Clique no botão amarelo escirto "Create security group", na página de criação selecione uma VPC criada com configurações padrão.
@@ -28,7 +28,7 @@ Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 Type: All traffic  Port:All  Source type: Anywhere-IPv4 
 ```
 Clique no botão amarelo "Create security group".
-## Criação da instância EC2
+### Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
 Dentro da página de criação de instância,em "Application and OS Images (Amazon Machine Image)" selecione a imagem "Amazon Linux 2023 AMI"
