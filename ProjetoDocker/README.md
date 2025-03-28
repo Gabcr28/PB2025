@@ -58,10 +58,10 @@ sudo systemctl start docker
 # Adiciona o usuário ec2-user ao grupo Docker
 sudo usermod -aG docker ec2-user
 
-#Instala docker-compose
+# Instala docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
-#Dá permissão de execução ao Docker-composse
+# Dá permissão de execução ao Docker-composse
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Inicia o WordPress com Docker Compose
