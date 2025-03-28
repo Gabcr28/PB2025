@@ -31,11 +31,11 @@ Clique no botão amarelo "Create security group".
 ### Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
-Dentro da página de criação de instância,em "Application and OS Images (Amazon Machine Image)" selecione a imagem "Amazon Linux 2023 AMI"
+Dentro da página de criação de instância,em "Application and OS Images (Amazon Machine Image)" selecione a imagem "Amazon Linux 2023 AMI".
 
 Na opção "Key pair (login)" crie uma chave .pem ou use uma já criada.
 
-Em "Network settings" clique no botão "Edit", use uma VPC com configuração padrão, em "Auto-assign public IP" deixe como "Enable"
+Em "Network settings" clique no botão "Edit", use uma VPC com configuração padrão, em "Auto-assign public IP" deixe como "Enable".
 
 No "Firewall (security groups)" selecione o security group criado anteriormente.
 
@@ -67,3 +67,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 # Inicia o WordPress com Docker Compose
 docker-compose up -d
 ```
+Após a criar a instância você pode acessá-la e usar um comando docker para confirmar que ele está instalado corretamente.
