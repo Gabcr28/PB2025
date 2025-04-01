@@ -68,6 +68,18 @@ Em "Connectivity e security", copie o "Endpoint" pois ele será usado para acess
 
 Abra o MySQL Workbench, e onde está escrito "MySQL Connections" clique no sinal de adição ao lado.
 
+Em seguida irá abrir uma janela, e em "Connection Name" crie um nome para conexão.
+
+Em "Hostname" cole o Endpoint copiado do BD, em "Username" coloque o login ID criado, e clique em "OK" abaixo, irá pedir a senha que você criou anteriormente. 
+
+![Image](https://github.com/user-attachments/assets/8d0fb345-9eb5-4bd9-9d89-4bdffa48c10a)
+
+Estando conectado ao BD, digite "CREATE DATABASE wordpress;" e depois clique no primeiro simbolo de raio.
+
+![Image](https://github.com/user-attachments/assets/2cae46ff-ca04-4338-b772-368518a3cf3a)
+
+Feito isto o BD estará pronto para ser usado no Wordpress.
+
 ### Criação do EFS
 Na AWS pesquise por EFS e clique na primeira opção.
 
