@@ -259,4 +259,6 @@ Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
 
 Na página do Load Balancer, copie o "DNS name" e cole no navegador para acessar o Wordpress.
 
-Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente.
+Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente e no Target Group ficará com status "Health".
+
+### Alarme Cloudwatch
