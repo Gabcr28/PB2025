@@ -232,4 +232,29 @@ Clique no botão amarelo "Next" abaixo.
 
 Em "Load balancing" selecione a opção "Attach to an existing load balancer".
 
-Em Attach to an existing load balancer "
+Em "Attach to an existing load balancer" selecione o target group criado anteriormente.
+
+Deixe o restante como padrão e clique no botão amarelo "Next" abaixo.
+
+Em "Group size" na opção "Desired capacity" coloque "2".
+
+Em "Scaling" na opção "Min desired capacity" coloque "2" para definir o número mínimo de instâncias do ASG.
+
+Em "Scaling" na opção "Max desired capacity" coloque "3" para definir o número máximo de instâncias do ASG.
+
+Em "Automatic scaling" selecione a opção "Target tracking scaling policy".
+
+Na opção "Metric type" deixe como "Average CPU utilization" para aumentar o número de instâncias baseado na utilização da CPU.
+
+Na opção "Target value" deixe como "80" para aumentar o número de instâncias baseado nesta métrica criado de utilização de CPU a 80%.
+
+Em "Additional settings", marque a opção "Enable default instance warmup" e deixe o valor como "300".
+
+Deixe o restante como padrão e clique no botão amarelo "Next" abaixo.
+
+Clique no botão amarelo "Next" novamente.
+
+Clique no botão amarelo "Next" novamente. E clique no botão amarelo "Create Auto Scaling group" abaixo.
+
+### Acesso ao Wordpress
+Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
