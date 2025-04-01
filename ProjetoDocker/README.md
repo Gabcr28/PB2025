@@ -86,6 +86,8 @@ Na AWS pesquise por EFS e clique na primeira opção.
 Na página do EFS clique no botão amarelo "Create file system" no canto superior direito.
 
 Em "Create file system" digite um nome para o EFS e selecione a VPC criada anteriormente e depois clique no botão amarelo "Create file system".
+
+Após criado salve o "File system ID", pois ele será usado no userdata da EC2. O "File System ID" será parecido com "fs-0be7ffff46e2b08b1".
 ### Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
@@ -112,8 +114,8 @@ sudo dnf install -y docker
 #Efs
 sudo dnf install -y amazon-efs-utils nfs-utils
 sudo mkdir -p /mnt/efs/wordpress/wp-content
-sudo mount -t efs fs-0be7ffff46e2b08b1:/ /mnt/efs/wordpress/wp-content
-echo "fs-0be7ffff46e2b08b1:/ /mnt/efs/wordpress/wp-content efs _netdev,tls,noresvport 0 0" | sudo tee -a /etc/fstab
+sudo mount -t efs fs-0be7ffff46e2b08b1:/ /mnt/efs/wordpress/wp-content #Subustitua o fs-... pelo seu File System ID
+echo "fs-0be7ffff46e2b08b1:/ /mnt/efs/wordpress/wp-content efs _netdev,tls,noresvport 0 0" | sudo tee -a /etc/fstab #Subustitua o fs-... pelo seu File System ID
 
 
 # Inicia o Docker
@@ -138,9 +140,9 @@ services:
       - "80:80"
     environment:
       WORDPRESS_DB_HOST: database-1.czk86sq22bgw.us-east-1.rds.amazonaws.com  # Substitua pelo endpoint do RDS
-      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_USER: admin
       WORDPRESS_DB_PASSWORD: Teste123  # Substitua pela senha do RDS
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_NAME: wordpress #Nome da database criada no MySQL Workbench
     volumes:
       - /mnt/efs/wordpress/wp-content:/var/www/html/wp-content
 EOF
@@ -157,4 +159,13 @@ sudo chmod -R 755 /mnt/efs/wordpress/wp-content
 # Inicia o WordPress com Docker Compose
 docker-compose up -d
 ```
-Após a criar a instância você pode acessá-la e usar um comando docker para confirmar que ele está instalado corretamente.
+Após a criar a instância, selecione a isntância e copie o "Public IPv4 adress" e cole na barra de pesquisa de seu navegador.
+
+Se tudo estiver correto irá aparecer esta página.
+![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
+
+Escolha o idioma e coloque os dados pedidos posteriormente como nome de usuário, senha, email.
+
+Depois de colocar os dados clique em "Instalar WordPress". Após isto o WordPress está pronto para uso.
+
+## 
