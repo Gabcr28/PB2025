@@ -155,6 +155,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 sudo chown -R 33:33 /mnt/efs/wordpress/wp-content  # 33:33 é o UID/GID do usuário www-data no container
 sudo chmod -R 755 /mnt/efs/wordpress/wp-content
+sudo chown -R www-data:www-data /var/www/html/wp-content
 
 # Inicia o WordPress com Docker Compose
 docker-compose up -d
@@ -164,10 +165,7 @@ Após a criar a instância, selecione a isntância e copie o "Public IPv4 adress
 Se tudo estiver correto irá aparecer esta página.
 ![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
 
-Escolha o idioma e coloque os dados pedidos posteriormente como nome de usuário, senha, email.
-
-Depois de colocar os dados clique em "Instalar WordPress". Após isto o WordPress está pronto para uso.
-
+Não clique em nada nesta página. Exclua a instância para não gerar custos.
 ## 2. Configuração do Auto Scaling e Load Balancer 
 ### Target Groups
 Na página EC2 da AWS, clique em "Target Groups" do lado esquerdo.
@@ -258,3 +256,7 @@ Clique no botão amarelo "Next" novamente. E clique no botão amarelo "Create Au
 
 ### Acesso ao Wordpress
 Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
+
+Na página do Load Balancer, copie o "DNS name" e cole no navegador para acessar o Wordpress.
+
+Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente.
