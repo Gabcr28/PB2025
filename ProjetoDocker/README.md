@@ -189,4 +189,47 @@ Clique no botão amarelo "Create load balancer".
 
 Selecione a opção "Application Load Balancer" e clique no botão "Create".
 
-Na tela de criação em "Basic configuration"
+Na tela de criação em "Basic configuration" crie um nome para seu LB.
+
+Na opção "Load Balancer IP address type" selecione a opção "IPv4"
+
+Em "Network mapping", na opção "VPC" selecione a VPC criada anteriormente e marque as 2 zonas disponíveis na opção "Availability Zones and subnets", e também selecione as 2 subnets públicas.
+
+Em "Security Group" Selecione o security group criado anteriormente.
+
+Em "Listeners and routing" na opção "Default action" selecione o Target Group criado anteriormente.
+
+Deixe o restante das configurações padrão e role até embaixo e clique no botão amarelo "Create load balancer".
+
+### Launch Template
+Na página EC2 da AWS, clique em "Launch Templates" do lado esquerdo.
+
+Em "Launch template name and description" coloque o nome do template e a versão pode deixar como "1".
+
+Em "Application and OS Images" clique em "Click Start" e selecione a AMI Amazon Linux 2023.
+
+Em "Instance type" selecione "t2.micro".
+
+Em "Network settings", na opção "Security groups" selecione o security group criado anteriormente.
+
+Abaixo clique em "Advanced details", e na opção "User data" coloque novamente o mesmo userdata usado para cirar a instância.
+
+Deixe o restante das configurações como padrão e clique no botão amarelo "Create launch template" do lado esquerdo.
+### Auto Scaling
+Na página EC2 da AWS, clique em "Auto Scaling Groups" do lado esquerdo.
+
+Clique no botão amarelo "Create Auto Scaling group".
+
+Em "Choose launch template", escolha o nome do ASG e na opção "Launch template" selecione o template criado anteriormente. e Clique no botão amarelo "Next" abaixo.
+
+Em "Network" na opção "VPC" selecione a VPC criada anteriormente.
+
+Em "Availability Zones and subnets" selecione as 2 subnets públicas.
+
+Em "Availability Zone distribution" selecione a opção "Balanced best effort".
+
+Clique no botão amarelo "Next" abaixo.
+
+Em "Load balancing" selecione a opção "Attach to an existing load balancer".
+
+Em Attach to an existing load balancer "
