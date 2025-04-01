@@ -168,4 +168,25 @@ Escolha o idioma e coloque os dados pedidos posteriormente como nome de usuário
 
 Depois de colocar os dados clique em "Instalar WordPress". Após isto o WordPress está pronto para uso.
 
-## 
+## 2. Configuração do Auto Scaling e Load Balancer 
+### Target Groups
+Na página EC2 da AWS, clique em "Target Groups" do lado esquerdo.
+
+Clique no botão amarelo "Create target group".
+
+Na página de criação em "Basic configuration" marque a opção "Instances", e abaixo em "Target group name" crie um nome para o target group.
+
+Na opção "VPC" selecione a VPC criada anteriormente.
+
+Pode deixar o resto das configurações como padrão. Clique no botão amarelo "Next".
+
+Nesta tela não selecione nada e clique no botão amarelo "Create target group".
+
+### Load Balancer
+Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
+
+Clique no botão amarelo "Create load balancer".
+
+Selecione a opção "Application Load Balancer" e clique no botão "Create".
+
+Na tela de criação em "Basic configuration"
