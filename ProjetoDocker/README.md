@@ -262,3 +262,38 @@ Na página do Load Balancer, copie o "DNS name" e cole no navegador para acessar
 Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente e no Target Group ficará com status "Health".
 
 ### Alarme Cloudwatch
+Na AWS pesquise por "Amazon Simple Notification Service" e clique na opção de "Services".
+
+Dentro da página clique em "Topics" do lado esquerdo.
+
+Clique em "aws-controltower-SecurityNotifications".
+
+Clique no botão amarelo "Create subscription".
+
+Na opção "Protocol" selecione o meio de receber o alerta, e logo depois em "Endpoint" selecione o destino do alerta. Depois clique no botão amarelo "Create subscription" abaixo.
+
+Após isto pesquise na AWS por "Cloudwatch" e clique na primeira opção.
+
+Dentro da página do Cloudwatch, clique na opção "In Alarm" do lado esquerdo.
+
+Clique no botão amarelo "Create alarm".
+
+Clique em "Select metric".
+
+Selecione "EC2", depois "By Auto Scaling Group" e selecione o ASG criado com o "Metric name" "CPUUtilization", esta será a metrica usada nesta exemplo, você pode usar mais de uma. Depois clique no botão amarelo "Select metric" abaixo.
+
+O padrão vai estar selecionado as opções "Static" e "Greater" deixe desta forma mesmo, e no valor a ser digitado digite 80, isto fará o alarme ser enviado quando a Utilização da CPU passar de 80%.
+
+Clique no botão amarelo "Next" abaixo.
+
+Nesta página irá estar marcada as opções "In alarm" e "Select an existing SNS topic", deixe desta forma.
+
+Em "Send a notification to..." selecione a primeira opção disponível que deve ser "aws-controltower-SecurityNotifications" ou outra que você tenha criado por conta.
+
+Clique no botão amarelo "Next" abaixo.
+
+Escolha um nome para o alarme e digite o texto que irá aparecer na mensagem que você irá receber do alarme.
+
+Clique no botão amarelo "Next" abaixo.
+
+E clique no botão amarelo "Create alarm" abaixo.
