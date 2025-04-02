@@ -1,6 +1,8 @@
 # Projeto Docker
 ## Tecnologias utilizadas
-AWS EC2 Amazon Linux 2023 AMI
+AWS EC2
+
+EC2 Amazon Linux 2023 AMI
 
 AWS Cloudwatch
 
@@ -167,38 +169,25 @@ Se tudo estiver correto irá aparecer esta página.
 
 Não clique em nada nesta página. Exclua a instância para não gerar custos.
 ## 2. Configuração do Auto Scaling e Load Balancer 
-### Target Groups
-Na página EC2 da AWS, clique em "Target Groups" do lado esquerdo.
-
-Clique no botão amarelo "Create target group".
-
-Na página de criação em "Basic configuration" marque a opção "Instances", e abaixo em "Target group name" crie um nome para o target group.
-
-Na opção "VPC" selecione a VPC criada anteriormente.
-
-Pode deixar o resto das configurações como padrão. Clique no botão amarelo "Next".
-
-Nesta tela não selecione nada e clique no botão amarelo "Create target group".
-
 ### Load Balancer
 Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
 
 Clique no botão amarelo "Create load balancer".
 
-Selecione a opção "Application Load Balancer" e clique no botão "Create".
+Nesta tela clique aqui onde está apontado na imagem.
+![Image](https://github.com/user-attachments/assets/ba342df5-09b3-4ba9-b062-d4d79d2aec27)
 
-Na tela de criação em "Basic configuration" crie um nome para seu LB.
+E na opção "Classic Load Balancer" clique em "Create".
 
-Na opção "Load Balancer IP address type" selecione a opção "IPv4"
+Escolha um nome para o Load Balancer. E em "Network mapping" selecione a VPC criada anteriormente.
 
-Em "Network mapping", na opção "VPC" selecione a VPC criada anteriormente e marque as 2 zonas disponíveis na opção "Availability Zones and subnets", e também selecione as 2 subnets públicas.
+E na opção "Availability Zones and subnets" selecione as 2 subnets públicas disponíveis.
 
-Em "Security Group" Selecione o security group criado anteriormente.
+Em "Security groups" selecione o security group criado anteriormente.
 
-Em "Listeners and routing" na opção "Default action" selecione o Target Group criado anteriormente.
+Em "Health checks", na opção "Ping path" escreva "/wp-admin/install.php" que é o caminho para a página de instalação do Wordpress.
 
-Deixe o restante das configurações padrão e role até embaixo e clique no botão amarelo "Create load balancer".
-
+O restante das configurações deixe como padrão e clique no botão amarelo "Create load balancer" abaixo.
 ### Launch Template
 Na página EC2 da AWS, clique em "Launch Templates" do lado esquerdo.
 
@@ -213,6 +202,7 @@ Em "Network settings", na opção "Security groups" selecione o security group c
 Abaixo clique em "Advanced details", e na opção "User data" coloque novamente o mesmo userdata usado para cirar a instância.
 
 Deixe o restante das configurações como padrão e clique no botão amarelo "Create launch template" do lado esquerdo.
+
 ### Auto Scaling
 Na página EC2 da AWS, clique em "Auto Scaling Groups" do lado esquerdo.
 
@@ -230,7 +220,7 @@ Clique no botão amarelo "Next" abaixo.
 
 Em "Load balancing" selecione a opção "Attach to an existing load balancer".
 
-Em "Attach to an existing load balancer" selecione o target group criado anteriormente.
+Em "Attach to an existing load balancer" selecione a opção "Choose from Classic Load Balancers" e depois selecione o Load Balancer criado anteriormente.
 
 Deixe o restante como padrão e clique no botão amarelo "Next" abaixo.
 
@@ -246,6 +236,8 @@ Na opção "Metric type" deixe como "Average CPU utilization" para aumentar o n�
 
 Na opção "Target value" deixe como "80" para aumentar o número de instâncias baseado nesta métrica criado de utilização de CPU a 80%.
 
+Em "Additional settings", marque a opção "Enable group metrics collection within CloudWatch" para monitoramento cloudwatch.
+
 Em "Additional settings", marque a opção "Enable default instance warmup" e deixe o valor como "300".
 
 Deixe o restante como padrão e clique no botão amarelo "Next" abaixo.
@@ -259,7 +251,7 @@ Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
 
 Na página do Load Balancer, copie o "DNS name" e cole no navegador para acessar o Wordpress.
 
-Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente e no Target Group ficará com status "Health".
+Dentro do Wordpress, coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para cirar página adicione no final do DNS do CLB "/wp-admin na barra de pesquisa.
 
 ### Alarme Cloudwatch
 Na AWS pesquise por "Amazon Simple Notification Service" e clique na opção de "Services".
