@@ -24,6 +24,8 @@ Na opção "Name tag auto-generation" escolhe um nome para VPC e deixe a opção
 
 No restante das opções deixe padrão, com 2 zonas de disponibilidade, 2 subnet públicas e 2 privadas.
 
+---
+
 ### Criação do Security group
 Dentro da AWS pesquise por EC2 e entre na página, dentro da página na esquerda procure por "Security Groups" e clique.
 
@@ -44,6 +46,9 @@ Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 Type: All traffic  Port:All  Source type: Anywhere-IPv4 
 ```
 Clique no botão amarelo "Create security group".
+
+---
+
 ### Criação do RDS e configuração
 Pesquise por RDS na AWS e clique na opção "Aurora and RDS".
 
@@ -83,6 +88,8 @@ Estando conectado ao BD, digite "CREATE DATABASE wordpress;" e depois clique no 
 
 Feito isto o BD estará pronto para ser usado no Wordpress.
 
+---
+
 ### Criação do EFS
 Na AWS pesquise por EFS e clique na primeira opção.
 
@@ -91,6 +98,9 @@ Na página do EFS clique no botão amarelo "Create file system" no canto superio
 Em "Create file system" digite um nome para o EFS e selecione a VPC criada anteriormente e depois clique no botão amarelo "Create file system".
 
 Após criado salve o "File system ID", pois ele será usado no userdata da EC2. O "File System ID" será parecido com "fs-0be7ffff46e2b08b1".
+
+---
+
 ### Criação da instância EC2
 Dentro da AWS pesquise por EC2 e entre na página, na página da EC2 clique no botão amarelo escrito "Launch instance".
 
@@ -169,6 +179,7 @@ Se tudo estiver correto irá aparecer esta página de instalação do Wordpress.
 ![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
 
 Não clique em nada nesta página. Exclua a instância para não gerar custos.
+
 ## 2. Configuração do Auto Scaling e Load Balancer 
 ### Load Balancer
 Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
@@ -189,6 +200,9 @@ Em "Security groups" selecione o security group criado anteriormente.
 Em "Health checks", na opção "Ping path" escreva "/wp-admin/install.php" que é o caminho para a página de instalação do Wordpress.
 
 O restante das configurações deixe como padrão e clique no botão amarelo "Create load balancer" abaixo.
+
+---
+
 ### Launch Template
 Na página EC2 da AWS, clique em "Launch Templates" do lado esquerdo.
 
@@ -203,6 +217,8 @@ Em "Network settings", na opção "Security groups" selecione o security group c
 Abaixo clique em "Advanced details", e na opção "User data" coloque novamente o mesmo userdata usado para cirar a instância.
 
 Deixe o restante das configurações como padrão e clique no botão amarelo "Create launch template" do lado esquerdo.
+
+---
 
 ### Auto Scaling
 Na página EC2 da AWS, clique em "Auto Scaling Groups" do lado esquerdo.
@@ -247,6 +263,8 @@ Clique no botão amarelo "Next" novamente.
 
 Clique no botão amarelo "Next" novamente. E clique no botão amarelo "Create Auto Scaling group" abaixo.
 
+---
+
 ### Acesso ao Wordpress
 Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
 
@@ -257,6 +275,8 @@ Dentro do Wordpress irá aparecer a página de instalação novamente.
 ![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
 
 Coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para criar página adicione no final do DNS do CLB "/wp-admin" na barra de pesquisa.
+
+---
 
 ### Alarme Cloudwatch
 Na AWS pesquise por "Amazon Simple Notification Service" e clique na opção de "Services".
