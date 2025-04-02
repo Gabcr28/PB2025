@@ -10,8 +10,6 @@ AWS EFS
 
 AWS Aurora and RDS
 
-Visual Studio Code 1.97.2
-
 MySQL Workbench 8.0.41 Community
 
 ## 1. Instalação e configuração do DOCKER com Wordpress no host EC2
@@ -97,7 +95,9 @@ Na página do EFS clique no botão amarelo "Create file system" no canto superio
 
 Em "Create file system" digite um nome para o EFS e selecione a VPC criada anteriormente e depois clique no botão amarelo "Create file system".
 
-Após criado salve o "File system ID", pois ele será usado no userdata da EC2. O "File System ID" será parecido com "fs-0be7ffff46e2b08b1".
+Após criado salve o "File system ID", pois ele será usado no userdata da EC2. Print do file system ID abaixo.
+
+![Image](https://github.com/user-attachments/assets/2e5ca25f-90e4-4254-9eda-7ac86d5a0b81)
 
 ---
 
