@@ -22,6 +22,10 @@ Na opção "Name tag auto-generation" escolhe um nome para VPC e deixe a opção
 
 No restante das opções deixe padrão, com 2 zonas de disponibilidade, 2 subnet públicas e 2 privadas.
 
+Imagem de como deve ficar o "Preview"
+
+![Image](https://github.com/user-attachments/assets/6b9fdaf1-ebf8-43ff-8e64-f9d6024e1a9b)
+
 ---
 
 ### Criação do Security group
@@ -70,7 +74,9 @@ O restante deixe como padrão e ao final da página clique no botão amarelo "Cr
 
 Após a criação do banco de dados, espere o status ficar como "Available", e clique no nome do seu BD.
 
-Em "Connectivity e security", copie o "Endpoint" pois ele será usado para acessar o BD pelo MySQL Workbench.
+Em "Connectivity e security", copie o "Endpoint" pois ele será usado para acessar o BD pelo MySQL Workbench. Imagem da localização do endpoint abaixo.
+
+![Image](https://github.com/user-attachments/assets/02ddb9f7-1b4b-43e6-9000-7a3abef3f9f4)
 
 Abra o MySQL Workbench, e onde está escrito "MySQL Connections" clique no sinal de adição ao lado.
 
