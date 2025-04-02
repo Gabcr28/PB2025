@@ -37,7 +37,7 @@ Type: HTTP  Port:80  Source type: My IP #Para acessar o Wordpress
 Type: MySQL/Aurora  Port:3306 Source type: SG criado #Conexão Instância com banco de dados
 Type: MySQL/Aurora  Port:3306 Source type: My IP #Conexão banco de dados
 Type: NFS  Port:2049  Source type: SG criado #Para montagem do EFS
-Type: HTTPS  Port:443  Source type:MyIPv4 #Caso necessário
+Type: HTTPS  Port:443  Source type:My IP #Caso necessário
 ```
 Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 ```
