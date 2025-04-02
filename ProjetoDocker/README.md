@@ -328,3 +328,5 @@ Escolha um nome para o alarme e digite o texto que irá aparecer na mensagem que
 Clique no botão amarelo "Next" abaixo.
 
 E clique no botão amarelo "Create alarm" abaixo.
+
+## Conclusão
