@@ -252,8 +252,10 @@ Na página EC2 da AWS, clique em "Load Balancers" do lado esquerdo.
 Na página do Load Balancer, copie o "DNS name" e cole no navegador para acessar o Wordpress.
 
 Dentro do Wordpress irá aparecer a página de instalação novamente.
+
 ![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
-Coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para cirar página adicione no final do DNS do CLB "/wp-admin na barra de pesquisa.
+
+Coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para criar página adicione no final do DNS do CLB "/wp-admin" na barra de pesquisa.
 
 ### Alarme Cloudwatch
 Na AWS pesquise por "Amazon Simple Notification Service" e clique na opção de "Services".
