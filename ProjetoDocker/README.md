@@ -274,7 +274,21 @@ Dentro do Wordpress irá aparecer a página de instalação novamente.
 
 ![Image](https://github.com/user-attachments/assets/d3199f4a-bb50-49d1-a65c-8c3beff0abd7)
 
-Coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para criar página adicione no final do DNS do CLB "/wp-admin" na barra de pesquisa.
+Coloque seu idioma de preferência e os dados pedidos, e após isto você conseguirá usar normalmente. 
+
+Após clicar em "Acessar" irá aparecer esta tela:
+
+![Image](https://github.com/user-attachments/assets/743e8b9c-b810-4f3d-831d-0e9d75427b3e)
+
+Após entrar com seu login irá aparecer está página:
+
+![Image](https://github.com/user-attachments/assets/4e19e512-f651-4d48-bf08-7cd1a6c77b80)
+
+Nesta interface você pode criar uma página clicando em "Adicionar nova página". Ao entrar novamente pelo DNS irá aparecer a página padrão do Wordpress caso você não tenha alterado, print da página padrão abaixo.
+
+![Image](https://github.com/user-attachments/assets/ae8796d4-5fef-491d-8f98-ac175b4487c4)
+
+Sempre ao entrar no DNS do CLB será possível apenas visualizar as páginas criadas, para entrar no seu login criado para criar página adicione no final do DNS do CLB "/wp-admin" na barra de pesquisa.
 
 ---
 
