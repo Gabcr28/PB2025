@@ -32,11 +32,12 @@ Clique no botão amarelo escirto "Create security group", na página de criaçã
 Na parte de "Inbound rules" clique em add rules e adicione estas regras:
 ```
 Type: SSH  Port:22  Source type: My IP  #Para acessar a instância via SSH
-Type: HTTP  Port:80  Source type: Anywhere-IPv4 #Para o ALB
+Type: HTTP  Port:80  Source type: SG criado #Para o ALB
 Type: HTTP  Port:80  Source type: My IP #Para acessar o Wordpress
-Type: MySQL/Aurora  Port:3306 Source type: SG das Instâncias #Conexão Instância com banco de dados
+Type: MySQL/Aurora  Port:3306 Source type: SG criado #Conexão Instância com banco de dados
 Type: MySQL/Aurora  Port:3306 Source type: My IP #Conexão banco de dados
-Type: NFS  Port:2049  Source type: Anywhere-IPv4 #Para montagem do EFS
+Type: NFS  Port:2049  Source type: SG criado #Para montagem do EFS
+Type: HTTPS  Port:443  Source type:MyIPv4 #Caso necessário
 ```
 Na parte de "Outbound rules" clique em add rules e adicione estas regras:
 ```
