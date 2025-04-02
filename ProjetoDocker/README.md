@@ -332,4 +332,4 @@ E clique no botão amarelo "Create alarm" abaixo.
 ## Conclusão
 Este projeto aborda desde a criação de uma VPC e a configuração de um Security Group até a implantação de um EFS, um Banco de dados RDS, também aborda a criação de um Classic Load Balancer e um Auto Scaling Group rodando um container Docker com Wordpress. A implementação de um AS para lidar com uma maior demanda se necessário e alta disponibilidade do serviço.
 
-Por fim, ao final deste projeto de forma prática consegui compreender melhor alguns conceitos da AWS .
+Por fim, ao final deste projeto de forma prática consegui compreender melhor alguns conceitos da AWS, complementando os conhecimentos adquiridos durante o ProjetoLinux feito anteriormente e presente no meu repositório.
