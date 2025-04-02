@@ -158,7 +158,7 @@ sudo chmod -R 755 /mnt/efs/wordpress/wp-content
 sudo chown -R www-data:www-data /var/www/html/wp-content
 
 # Inicia o WordPress com Docker Compose
-docker-compose up -d
+sudo docker-compose up -d
 ```
 Após a criar a instância, selecione a isntância e copie o "Public IPv4 adress" e cole na barra de pesquisa de seu navegador.
 
