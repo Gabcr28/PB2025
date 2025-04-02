@@ -290,7 +290,7 @@ Após entrar com seu login irá aparecer está página:
 
 ![Image](https://github.com/user-attachments/assets/4e19e512-f651-4d48-bf08-7cd1a6c77b80)
 
-Nesta interface você pode criar uma página clicando em "Adicionar nova página". Ao entrar novamente pelo DNS irá aparecer a página padrão do Wordpress caso você não tenha alterado, print da página padrão abaixo.
+Nesta interface você pode criar uma página clicando em "Adicionar nova página". Ao entrar novamente pelo DNS irá aparecer que você tenha criado.
 
 ![Image](https://github.com/user-attachments/assets/ae8796d4-5fef-491d-8f98-ac175b4487c4)
 
