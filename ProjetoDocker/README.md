@@ -1,4 +1,4 @@
-# Projeto Docker
+![image](https://github.com/user-attachments/assets/2b1666ce-df17-4eb9-a60e-30641cf2206d)# Projeto Docker
 ## Tecnologias utilizadas
 AWS EC2
 
@@ -10,7 +10,7 @@ AWS EFS
 
 AWS Aurora and RDS
 
-MySQL Workbench 8.0.41 Community
+Visual Studio Code 1.97.2
 
 ## 1. Instalação e configuração do DOCKER com Wordpress no host EC2
 ### Criação da VPC
@@ -18,13 +18,30 @@ Dentro da AWS pesquise por VPC e clique na primeira opção, dentro da página c
 
 Na página de criação, na opção "Resources to create" marque a opção "VPC and more"
 
+
 Na opção "Name tag auto-generation" escolhe um nome para VPC e deixe a opção "Auto-generate" marcada.
+
+Em "NAT gateways ($)" marque a opção "In 1 AZ".
 
 No restante das opções deixe padrão, com 2 zonas de disponibilidade, 2 subnet públicas e 2 privadas.
 
 Imagem de como deve ficar o "Preview"
 
-![Image](https://github.com/user-attachments/assets/6b9fdaf1-ebf8-43ff-8e64-f9d6024e1a9b)
+![Image](https://github.com/user-attachments/assets/a89a46cc-e3f3-4bd6-970a-13218e29182e)
+
+Depois clique no botão amarelo "Create VPC".
+
+Tendo criado a VPC pesquise na AWS por "subnet group" e clique nesta opção mostrada na imagem abaixo.
+
+![Image](https://github.com/user-attachments/assets/f3ac9fb0-a01d-469f-adaf-cf28096ab5d3)
+
+Entrando na página clique no botão amarelo "Create DB Subnet Group" do lado esquerdo.
+
+Crie um nome para o grupo, em "VPC" selecione a VPC criada anteriormente, "Availability zone" selecione a zona de disponibilidade da sua VPC e em "Subnets" selecione somente as subnets privadas. Imagem demonstrando como deve ficar.
+
+![Image](https://github.com/user-attachments/assets/02908d50-aa43-429e-826c-3a274a55e701)
+
+Após isto clique no botão aamrelo "Create DB Subnet Group".
 
 ---
 
@@ -66,7 +83,7 @@ Na opção "Credentials Settings" crie um login ID ou use o padrão, e selecione
 
 Em "Instance Configuration" selecione a opção "db.t3.micro".
 
-Em "Connectivity" na opção "Virtual private cloud (VPC)" selecione a VPC criada anteriormente, e na opção "Public Acess" deixe como "Yes" para se conectar ao DB pelo MySQL Workbench.
+Em "Connectivity" na opção "Virtual private cloud (VPC)" selecione a VPC criada anteriormente e na opção "DB subnet group" selecione o grupo de subnets privadas criado anteriormente.
 
 Na opção "VPC security group (firewall)" selecione a opção "Choose existing" e abaixo selecione o security group criado anteriormente.
 
@@ -74,23 +91,62 @@ O restante deixe como padrão e ao final da página clique no botão amarelo "Cr
 
 Após a criação do banco de dados, espere o status ficar como "Available", e clique no nome do seu BD.
 
-Em "Connectivity e security", copie o "Endpoint" pois ele será usado para acessar o BD pelo MySQL Workbench. Imagem da localização do endpoint abaixo.
+Em "Connectivity e security", copie o "Endpoint" pois ele será usado para acessar o BD por meio de uma instância.
 
 ![Image](https://github.com/user-attachments/assets/02ddb9f7-1b4b-43e6-9000-7a3abef3f9f4)
 
-Abra o MySQL Workbench, e onde está escrito "MySQL Connections" clique no sinal de adição ao lado.
+Abra deixarmos o DB pronto para uso iremos acessar o MySQL por meio de uma instância pelo Visual Studio Code.
 
-Em seguida irá abrir uma janela, e em "Connection Name" crie um nome para conexão.
+Na AWS pesquise por EC2, entrando na página clique no botão amarelo "Launch instance" do lado esquerdo.
 
-Em "Hostname" cole o Endpoint copiado do BD, em "Username" coloque o login ID criado, e clique em "OK" abaixo, irá pedir a senha que você criou anteriormente. 
+Escolha um nome para sua instancia, e em "Application and OS Images (Amazon Machine Image)" selecione "Amazon Linux 2023 AMI".
 
-![Image](https://github.com/user-attachments/assets/8d0fb345-9eb5-4bd9-9d89-4bdffa48c10a)
+em "Key pair" selecione uma chave .pem criada ou crie uma e guarde em um local securo do seu computador.
 
-Estando conectado ao BD, digite "CREATE DATABASE wordpress;" e depois clique no primeiro simbolo de raio.
+Em "Network settings" selecione a VPC criada e selecione uma subnet pública, na opção "Firewall (security groups)" selecione o security group criado anteriormente.
 
-![Image](https://github.com/user-attachments/assets/2cae46ff-ca04-4338-b772-368518a3cf3a)
+Abaixo clique em "Advanced details" e em "User data - optional" para instalar o MySQL coloque:
 
-Feito isto o BD estará pronto para ser usado no Wordpress.
+```
+#!/bin/bash
+
+sudo dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-5.noarch.rpm
+sudo dnf install -y mysql-community-client
+```
+
+Após isto clique no botão amarelo "Launch instance" do lado esquerdo.
+
+Na página da EC2 na opção "Instances" selecione a sua instância e clique no botão "Connect"
+
+Nesta página clique para copiar, igual mostrado na imagem abaixo:
+
+![Image](https://github.com/user-attachments/assets/27e44b00-0aaa-47c4-9047-8d4c0c3ec948)
+
+Agora com isto copiado entre no terminal do Visual Studio Code e copie o texto copiado e no lugar da chave coloque o caminho em que ela está no seu computador. Exemplo:
+
+```
+ssh -i "C:/downloads/newkey.pem" ec2-user@10.0.11.93
+```
+
+A chave também deve ter permissão de somente leitura. Para mais detalhes acesse a pasta ProjetoLinux dentro deste repositório.
+
+Ao se conectar irá aparecer uma mensgaem, escreva "yes", e após isto irá se conectar e aparecer esta tela:
+
+![Image](https://github.com/user-attachments/assets/acf26c61-75a6-462b-b1d8-a9e374448ba2)
+
+Estando conectado escreva:
+
+```
+mysql -h #DNSdoBD -u #MasterUsername_BD -p
+```
+
+Ao escrever e substituindo os valores com # pelos solicitados, escreva:
+
+```
+CREATE DATABASE wordpress;
+```
+
+Com isto feito você poderá usar esta database criado para seu wordpress, pode fechar o Visual Studio Code e deletar a instância para não gerar custos.
 
 ---
 
@@ -217,6 +273,8 @@ Em "Launch template name and description" coloque o nome do template e a versão
 Em "Application and OS Images" clique em "Click Start" e selecione a AMI Amazon Linux 2023.
 
 Em "Instance type" selecione "t2.micro".
+
+Em "Network settings" na opção "Subnet" selecione uma subnet privada vinculado a VPC criada anteriormente.
 
 Em "Network settings", na opção "Security groups" selecione o security group criado anteriormente.
 
