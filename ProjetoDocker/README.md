@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2b1666ce-df17-4eb9-a60e-30641cf2206d)# Projeto Docker
+# Projeto Docker
 ## Tecnologias utilizadas
 AWS EC2
 
