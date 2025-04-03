@@ -267,7 +267,7 @@ Deixe o restante como padrão e clique no botão amarelo "Next" abaixo.
 
 Clique no botão amarelo "Next" novamente.
 
-Clique no botão amarelo "Next" novamente. E clique no botão amarelo "Create Auto Scaling group" abaixo.
+Clique no botão amarelo "Next" novamente. E clique no botão amarelo "Create Auto Scaling group" abaixo, e logo depois as instâncias do AS serão criadas.
 
 ---
 
