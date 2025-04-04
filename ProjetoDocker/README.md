@@ -214,8 +214,8 @@ services:
       - "80:80"
     environment:
       WORDPRESS_DB_HOST: database-1.czk86sq22bgw.us-east-1.rds.amazonaws.com  # Substitua pelo endpoint do RDS
-      WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: Teste123  # Substitua pela senha do RDS
+      WORDPRESS_DB_USER: admin # Substitua pelo usuario criado
+      WORDPRESS_DB_PASSWORD: # Substitua pela senha do RDS
       WORDPRESS_DB_NAME: wordpress #Nome da database criada pela instância
     volumes:
       - /mnt/efs/wordpress/wp-content:/var/www/html/wp-content
